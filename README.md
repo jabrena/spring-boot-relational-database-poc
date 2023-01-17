@@ -1,4 +1,6 @@
-# spring-boot-postgresql
+# Spring Boot - PostgreSQL
+
+[![CI Builds](https://github.com/jabrena/spring-boot-postgresql/actions/workflows/build.yaml/badge.svg)](https://github.com/jabrena/spring-boot-postgresql/actions/workflows/build.yaml)
 
 ## References
 
