@@ -28,6 +28,6 @@ mvn versions:display-plugin-updates
 - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
 - https://docs.spring.io/spring-boot/docs/current/reference/html/data.html#data.sql.jooq
 - https://github.com/spring-projects/spring-data-examples
-- https://just.maciejwalkowiak.com/
 - https://hub.docker.com/_/postgres
-- https://assertj.github.io/doc/
+- https://github.com/jOOQ/sakila
+- https://just.maciejwalkowiak.com/
