@@ -5,9 +5,26 @@
 A POC to review different ways to implement
 the data access layer for a relational database.
 
+## Entity Relational Diagram (ERD)
+
+![](docs/erd.png)
+
+## Feature 1: List movies starting by A
+
+```sql
+SELECT *
+FROM film
+WHERE title LIKE 'A%'
+```
+
+**Note:** The query will return 46 rows.
+
+This feature will be implemented with the following alternatives:
+
+- [ ] Spring Boot + JOOQ
+- [ ] Spring Boot + JDBC
 - [ ] Spring Data JDBC
 - [ ] Spring Data JPA
-- [ ] Spring Boot + JOOQ
 
 ## How to run in local
 
@@ -30,4 +47,5 @@ mvn versions:display-plugin-updates
 - https://github.com/spring-projects/spring-data-examples
 - https://hub.docker.com/_/postgres
 - https://github.com/jOOQ/sakila
+- https://www.pgadmin.org/
 - https://just.maciejwalkowiak.com/
