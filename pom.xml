@@ -18,6 +18,7 @@
     <modules>
         <module>spring-data-jdbc</module>
         <module>spring-data-jpa</module>
+        <module>spring-boot-jdbc</module>
         <module>spring-boot-jooq</module>
     </modules>
 

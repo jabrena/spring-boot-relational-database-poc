@@ -133,7 +133,6 @@
                     <configLocation>src/main/checkstyle/google_checks.xml</configLocation>
                     <suppressionsLocation>src/main/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <violationSeverity>warning</violationSeverity>
