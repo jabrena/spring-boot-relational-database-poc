@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  sakiladb:
+    image: frantiseks/postgres-sakila
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: sakila
+    expose:
+      - 5432
+    networks:
+      - spring-cloud-network
+
+  spring-boot-jdbc:
+    container_name: spring-boot-jdbc
+    build:
+      context: spring-boot-jdbc
+      dockerfile: Dockerfile
+    image: spring-boot-jdbc:latest
+    ports:
+      - 8080:8080
+    networks:
+      - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge
