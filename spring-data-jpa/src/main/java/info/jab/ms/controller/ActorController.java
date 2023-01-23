@@ -1,5 +1,7 @@
-package info.jab.ms;
+package info.jab.ms.controller;
 
+import info.jab.ms.service.ActorDTO;
+import info.jab.ms.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +13,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "api/v1", produces = APPLICATION_JSON_VALUE)
-public class FilmController {
+public class ActorController {
     @Autowired
-    private FilmService filmService;
+    private ActorService actorService;
 
-    @GetMapping(value = "/films")
-    public List<FilmDTO> getData() {
-        return filmService.getFilms();
+    @GetMapping(value = "/actors")
+    public List<ActorDTO> getData() {
+        return actorService.getActors();
     }
 }

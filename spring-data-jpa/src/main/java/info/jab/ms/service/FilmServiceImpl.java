@@ -1,5 +1,7 @@
-package info.jab.ms;
+package info.jab.ms.service;
 
+import info.jab.ms.service.FilmDTO;
+import info.jab.ms.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

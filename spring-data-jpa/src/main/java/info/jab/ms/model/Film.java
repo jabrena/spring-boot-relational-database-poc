@@ -1,4 +1,4 @@
-package info.jab.ms;
+package info.jab.ms.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "film")
-class Film {
+public class Film {
 	@Id
 	@Column(name="film_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
