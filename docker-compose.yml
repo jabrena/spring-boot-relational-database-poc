@@ -51,6 +51,19 @@ services:
     networks:
       - spring-cloud-network
 
+  spring-data-jpa:
+    container_name: spring-data-jpa
+    build:
+      context: spring-data-jpa
+      dockerfile: Dockerfile
+    image: spring-data-jpa:latest
+    ports:
+      - 8084:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker_compose
+    networks:
+      - spring-cloud-network
+
 networks:
     spring-cloud-network:
         driver: bridge
