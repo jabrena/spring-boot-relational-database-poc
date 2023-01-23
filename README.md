@@ -17,19 +17,20 @@ FROM film
 WHERE title LIKE 'A%'
 ```
 
-**Note:** The query will return 46 rows.
+**Note:** The query returns 46 rows.
 
 This feature will be implemented with the following alternatives:
 
 - [x] Spring Boot + JDBC
 - [x] Spring Boot + JOOQ
-- [ ] Spring Data JDBC
+- [x] Spring Data JDBC
 - [ ] Spring Data JPA
 
 ```shell
 docker run -e POSTGRES_PASSWORD=sakila --rm --name sakiladb -p 5432:5432 -d "frantiseks/postgres-sakila"
 mvn spring-boot:run -pl spring-boot-jdbc
 mvn spring-boot:run -pl spring-boot-jooq
+mvn spring-boot:run -pl spring-data-jdbc
 curl http://localhost:8080/api/v1/films
 docker stop sakiladb
 ```
@@ -37,11 +38,13 @@ docker stop sakiladb
 ```shell
 mvn clean package -pl spring-boot-jdbc
 mvn clean package -pl spring-boot-jooq
+mvn clean package -pl spring-data-jdbc
 docker compose config
 docker compose up --build
 docker stats
 curl http://localhost:8081/api/v1/films
 curl http://localhost:8082/api/v1/films
+curl http://localhost:8083/api/v1/films
 docker compose down
 ```
 
@@ -68,7 +71,9 @@ mvn versions:display-plugin-updates
 - https://github.com/spring-projects/spring-data-examples
 - https://hub.docker.com/_/postgres
 - https://www.testcontainers.org/supported_docker_environment/logging_config/
+- https://www.testcontainers.org/modules/databases/jdbc/
 - https://docs.docker.com/compose/
 - https://github.com/jOOQ/sakila
+- https://github.com/fspacek/docker-postgres-sakila
 - https://www.pgadmin.org/
 - https://just.maciejwalkowiak.com/
