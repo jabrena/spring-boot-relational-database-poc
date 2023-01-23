@@ -1,6 +1,7 @@
 version: "3.7"
 
 services:
+
   sakiladb:
     image: frantiseks/postgres-sakila
     restart: always
@@ -23,6 +24,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker_compose
     networks:
       - spring-cloud-network
+
   spring-boot-jooq:
     container_name: spring-boot-jooq
     build:
@@ -35,6 +37,20 @@ services:
       - SPRING_PROFILES_ACTIVE=docker_compose
     networks:
       - spring-cloud-network
+
+  spring-data-jdbc:
+    container_name: spring-data-jdbc
+    build:
+      context: spring-data-jdbc
+      dockerfile: Dockerfile
+    image: spring-data-jdbc:latest
+    ports:
+      - 8083:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker_compose
+    networks:
+      - spring-cloud-network
+
 networks:
     spring-cloud-network:
         driver: bridge
