@@ -27,6 +27,12 @@ This feature will be implemented with the following alternatives:
 - [ ] Spring Data JPA
 
 ```shell
+docker run -e POSTGRES_PASSWORD=sakila --rm --name sakiladb -p 5432:5432 -d "frantiseks/postgres-sakila"
+mvn spring-boot:run -pl spring-boot-jdbc
+docker stop sakiladb
+```
+
+```shell
 mvn clean package -pl spring-boot-jdbc
 docker compose config
 docker compose up --build

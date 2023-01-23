@@ -14,7 +14,8 @@ class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> getFilms() {
-        String sql = """
+        String sql =
+"""
 SELECT *
 FROM film
 WHERE title LIKE 'A%'

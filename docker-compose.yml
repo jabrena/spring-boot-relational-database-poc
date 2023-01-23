@@ -19,6 +19,8 @@ services:
     image: spring-boot-jdbc:latest
     ports:
       - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker_compose
     networks:
       - spring-cloud-network
 networks:
