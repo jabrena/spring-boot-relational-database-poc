@@ -12,7 +12,7 @@ the data access layer for a relational database.
 ## Feature 1: List movies starting by A
 
 ```sql
-SELECT *
+SELECT SELECT FILM_ID, TITLE
 FROM film
 WHERE title LIKE 'A%'
 ```
@@ -21,23 +21,27 @@ WHERE title LIKE 'A%'
 
 This feature will be implemented with the following alternatives:
 
-- [ ] Spring Boot + JOOQ
 - [x] Spring Boot + JDBC
+- [x] Spring Boot + JOOQ
 - [ ] Spring Data JDBC
 - [ ] Spring Data JPA
 
 ```shell
 docker run -e POSTGRES_PASSWORD=sakila --rm --name sakiladb -p 5432:5432 -d "frantiseks/postgres-sakila"
 mvn spring-boot:run -pl spring-boot-jdbc
+mvn spring-boot:run -pl spring-boot-jooq
+curl http://localhost:8080/api/v1/films
 docker stop sakiladb
 ```
 
 ```shell
 mvn clean package -pl spring-boot-jdbc
+mvn clean package -pl spring-boot-jooq
 docker compose config
 docker compose up --build
 docker stats
-curl http://localhost:8080/api/v1/films
+curl http://localhost:8081/api/v1/films
+curl http://localhost:8082/api/v1/films
 docker compose down
 ```
 

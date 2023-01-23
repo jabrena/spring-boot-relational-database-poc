@@ -16,7 +16,7 @@ class FilmServiceImpl implements FilmService {
     public List<Film> getFilms() {
         String sql =
 """
-SELECT *
+SELECT FILM_ID, TITLE
 FROM film
 WHERE title LIKE 'A%'
 """;
