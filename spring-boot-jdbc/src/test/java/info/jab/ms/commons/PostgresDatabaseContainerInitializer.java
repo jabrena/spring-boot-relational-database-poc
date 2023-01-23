@@ -4,22 +4,21 @@ import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.ext.ScriptUtils;
-import org.testcontainers.jdbc.JdbcDatabaseDelegate;
+import org.testcontainers.utility.DockerImageName;
 
 public class PostgresDatabaseContainerInitializer
         implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+
+    private static final DockerImageName myImage = DockerImageName.parse("frantiseks/postgres-sakila")
+            .asCompatibleSubstituteFor("postgres");
+
     private static final PostgreSQLContainer<?> sqlContainer =
-            new PostgreSQLContainer<>("postgres:15.1-alpine")
+            new PostgreSQLContainer<>(myImage)
                     .withDatabaseName("postgres")
                     .withUsername("postgres")
                     .withPassword("postgres");
     static {
         sqlContainer.start();
-
-        var containerDelegate = new JdbcDatabaseDelegate(sqlContainer, "");
-        ScriptUtils.runInitScript(containerDelegate, "postgres-sakila-db/postgres-sakila-schema.sql");
-        ScriptUtils.runInitScript(containerDelegate, "postgres-sakila-db/postgres-sakila-insert-data.sql");
     }
 
     public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
