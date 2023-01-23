@@ -13,10 +13,8 @@ class FilmServiceImpl implements FilmService {
 
     @Override
     public List<FilmDTO> getFilms() {
-        return filmRepository.findAll().stream()
-                .filter(f -> f.getTitle().startsWith("A"))
+        return filmRepository.myQuery().stream()
                 .map(f -> new FilmDTO(f.getFilm_id(), f.getTitle()))
-                //.peek(System.out::println)
                 .toList();
     }
 }
