@@ -35,9 +35,7 @@ class Film {
 	private Long film_id;
 	@Column(name="title")
 	private String title;
-	@Column(name="description")
-	private String description;
-
+	//@Column(name="description") private String description;
 	//@Column(name="release_year") Integer release_year,
 	//@Column(name="language_id") Integer language_id,
 	//@Column(name="original_language_id") Integer original_language_id,
@@ -50,10 +48,9 @@ class Film {
 	//@Column(name="special_features") String special_features,
 	//@Column(name="fulltext") String fulltext
 
-	public Film(Long film_id, String title, String description) {
+	public Film(Long film_id, String title) {
 		this.film_id = film_id;
 		this.title = title;
-		this.description = description;
 	}
 
 	public Film() {
@@ -67,10 +64,6 @@ class Film {
 		return title;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
 	public void setFilm_id(Long film_id) {
 		this.film_id = film_id;
 	}
@@ -79,21 +72,17 @@ class Film {
 		this.title = title;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Film film = (Film) o;
-		return Objects.equals(film_id, film.film_id) && Objects.equals(title, film.title) && Objects.equals(description, film.description);
+		return Objects.equals(film_id, film.film_id) && Objects.equals(title, film.title);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(film_id, title, description);
+		return Objects.hash(film_id, title);
 	}
 
 	@Override
@@ -101,7 +90,6 @@ class Film {
 		return "Film{" +
 				"film_id=" + film_id +
 				", title='" + title + '\'' +
-				", description='" + description + '\'' +
 				'}';
 	}
 }
