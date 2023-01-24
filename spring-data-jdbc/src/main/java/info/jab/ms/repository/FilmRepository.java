@@ -1,5 +1,6 @@
-package info.jab.ms;
+package info.jab.ms.repository;
 
+import info.jab.ms.model.Film;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,5 +16,5 @@ WHERE title LIKE 'A%'
 """;
 
     @Query(sql)
-    List<FilmDTO> myQuery();
+    List<FilmQueryProjection> myQuery();
 }

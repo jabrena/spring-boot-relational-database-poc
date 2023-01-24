@@ -18,4 +18,6 @@ This feature will be implemented with the following alternatives:
 
 ```
 mvn generate-sources -pl spring-data-jpa
+mvn generate-sources -pl spring-data-jdbc
+
 ```
