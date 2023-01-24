@@ -1,16 +1,14 @@
 package info.jab.ms.service;
 
-import info.jab.ms.model.Actor;
-import info.jab.ms.service.dto.ActorDTO;
-
+import com.jab.ms.openapi.gen.model.ActorDto;
 import java.util.List;
 import java.util.Optional;
 
 public interface ActorService {
 
-    List<ActorDTO> getAll();
-    ActorDTO add(ActorDTO newActor);
-    Optional<ActorDTO> get(Long actorId);
+    List<ActorDto> getAll();
+    ActorDto add(ActorDto newActor);
+    Optional<ActorDto> get(Long actorId);
     void delete(Long actorId);
-    ActorDTO update(Long actorId, ActorDTO newActorData);
+    ActorDto update(Long actorId, ActorDto newActorData);
 }

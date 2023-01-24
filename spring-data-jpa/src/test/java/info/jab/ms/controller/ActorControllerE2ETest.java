@@ -2,9 +2,8 @@ package info.jab.ms.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jab.ms.openapi.gen.model.ActorDto;
 import info.jab.ms.commons.AbstractIntegrationTest;
-import info.jab.ms.service.dto.ActorDTO;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,6 +32,12 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    public record ActorDTO(
+            Long actor_id,
+            String first_name,
+            String last_name,
+            String last_update) { }
+
     @Test
     public void should_return_all_actors() {
 
@@ -40,7 +45,7 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors";
 
         //When
-        ResponseEntity<List<ActorDTO>> result =
+        ResponseEntity<List<ActorDto>> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.GET,
@@ -54,7 +59,7 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void should_add_a_new_actor() throws JSONException, JsonProcessingException {
+    public void should_add_a_new_actor() throws JsonProcessingException {
 
         //Given
         String address = "http://localhost:" + port + "/api/v1/actors";
@@ -64,6 +69,7 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        //TODO Review this tests
         ActorDTO actor = new ActorDTO(null, "Demo", "Demo2", LocalDateTime.now().toString());
 
         ObjectMapper mapper = new ObjectMapper();
@@ -91,17 +97,17 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors/1";
 
         //When
-        ResponseEntity<ActorDTO> result =
+        ResponseEntity<ActorDto> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.GET,
                         null,
-                        ActorDTO.class
+                        ActorDto.class
                 );
 
         //Then
         then(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-        then(result.getBody().actor_id()).isNotNull();
+        then(result.getBody().getActorId()).isNotNull();
     }
 
     @Test
@@ -111,12 +117,12 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors/999";
 
         //When
-        ResponseEntity<ActorDTO> result =
+        ResponseEntity<ActorDto> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.GET,
                         null,
-                        ActorDTO.class
+                        ActorDto.class
                 );
 
         //Then
@@ -133,12 +139,12 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors/" + newActor.actor_id();
 
         //When
-        ResponseEntity<ActorDTO> result =
+        ResponseEntity<Void> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.DELETE,
                         null,
-                        ActorDTO.class
+                        Void.class
                 );
 
         //Then
