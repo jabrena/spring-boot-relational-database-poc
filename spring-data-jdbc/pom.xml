@@ -119,7 +119,7 @@
                         </goals>
                         <configuration>
                             <inputSpec>
-                                ${project.basedir}/../actor_api_spec.yml
+                                ${project.basedir}/../sakila_api_spec.yml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>

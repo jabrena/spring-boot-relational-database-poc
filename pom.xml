@@ -40,7 +40,7 @@
                 <version>1.7</version>
                 <executions>
                     <execution>
-                        <id>authentication</id>
+                        <id>actor</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>validate</goal>
@@ -48,6 +48,33 @@
                         <configuration>
                             <inputFile>
                                 ${project.basedir}/actor_api_spec.yml
+                            </inputFile>
+                            <validateInfoLicense>false</validateInfoLicense>
+                            <validateInfoDescription>false</validateInfoDescription>
+                            <validateInfoContact>false</validateInfoContact>
+                            <validateOperationOperationId>true</validateOperationOperationId>
+                            <validateOperationDescription>false</validateOperationDescription><!-- * -->
+                            <validateOperationTag>true</validateOperationTag>
+                            <validateOperationSummary>false</validateOperationSummary>
+                            <validateModelPropertiesExample>false</validateModelPropertiesExample>
+                            <validateModelNoLocalDef>true</validateModelNoLocalDef>
+                            <pathNamingConvention>HyphenCase</pathNamingConvention>
+                            <parameterNamingConvention>CamelCase</parameterNamingConvention>
+                            <headerNamingConvention>UnderscoreCase</headerNamingConvention>
+                            <propertyNamingConvention>CamelCase</propertyNamingConvention>
+                            <validateNaming>false</validateNaming>
+                            <ignoreHeaderXNaming>true</ignoreHeaderXNaming>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>film</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <inputFile>
+                                ${project.basedir}/film_api_spec.yml
                             </inputFile>
                             <validateInfoLicense>false</validateInfoLicense>
                             <validateInfoDescription>false</validateInfoDescription>

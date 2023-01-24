@@ -9,6 +9,18 @@ tags:
   - name: actors
     description: REST endpoints over the Actor Entity/AggregateRoot  in Sakila DB
 paths:
+  /api/v1/films:
+    get:
+      tags:
+        - films
+      operationId: get_films
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Films'
   /api/v1/actors:
     get:
       tags:
@@ -106,6 +118,21 @@ paths:
           description: Not found
 components:
   schemas:
+    Films:
+      type: array
+      items:
+        $ref: '#/components/schemas/Film'
+    Film:
+      type: object
+      properties:
+        film_id:
+          type: integer
+          format: int64
+          description: unique identifier for any film
+        title:
+          type: string
+          format: int64
+          description: Film movie
     Actors:
       type: array
       items:
