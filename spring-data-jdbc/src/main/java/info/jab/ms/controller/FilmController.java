@@ -1,5 +1,7 @@
-package info.jab.ms;
+package info.jab.ms.controller;
 
+import info.jab.ms.service.FilmService;
+import info.jab.ms.service.dto.FilmDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

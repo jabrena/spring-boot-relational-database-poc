@@ -1,6 +1,7 @@
-package info.jab.ms;
+package info.jab.ms.controller;
 
 import info.jab.ms.commons.AbstractIntegrationTest;
+import info.jab.ms.service.dto.FilmDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class FilmControllerTest extends AbstractIntegrationTest {
+class FilmControllerE2ETest extends AbstractIntegrationTest {
 
     @LocalServerPort
     private int port;

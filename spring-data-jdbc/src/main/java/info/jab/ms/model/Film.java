@@ -1,4 +1,4 @@
-package info.jab.ms;
+package info.jab.ms.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -24,6 +24,7 @@ import java.math.BigDecimal;
  * );
  */
 @Table("film")
+public
 record Film(
 	@Column("film_id") @Id Long film_id,
 	@Column("title") String title,
