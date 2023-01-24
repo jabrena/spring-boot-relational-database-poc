@@ -32,6 +32,42 @@
                     <allowSnapshots>false</allowSnapshots>
                 </configuration>
             </plugin>
+
+            <!-- OpenAPI Tools: Validator & Code Generator -->
+            <plugin>
+                <groupId>org.openapitools.openapistylevalidator</groupId>
+                <artifactId>openapi-style-validator-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>authentication</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <configuration>
+                            <inputFile>
+                                ${project.basedir}/actor_api_spec.yml
+                            </inputFile>
+                            <validateInfoLicense>false</validateInfoLicense>
+                            <validateInfoDescription>false</validateInfoDescription>
+                            <validateInfoContact>false</validateInfoContact>
+                            <validateOperationOperationId>true</validateOperationOperationId>
+                            <validateOperationDescription>false</validateOperationDescription><!-- * -->
+                            <validateOperationTag>true</validateOperationTag>
+                            <validateOperationSummary>false</validateOperationSummary>
+                            <validateModelPropertiesExample>false</validateModelPropertiesExample>
+                            <validateModelNoLocalDef>true</validateModelNoLocalDef>
+                            <pathNamingConvention>HyphenCase</pathNamingConvention>
+                            <parameterNamingConvention>CamelCase</parameterNamingConvention>
+                            <headerNamingConvention>UnderscoreCase</headerNamingConvention>
+                            <propertyNamingConvention>CamelCase</propertyNamingConvention>
+                            <validateNaming>false</validateNaming>
+                            <ignoreHeaderXNaming>true</ignoreHeaderXNaming>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
