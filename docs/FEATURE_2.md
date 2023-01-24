@@ -14,4 +14,4 @@ This feature will be implemented with the following alternatives:
 - [ ] Spring Boot + JDBC
 - [ ] Spring Boot + JOOQ
 - [ ] Spring Data JDBC
-- [ ] Spring Data JPA
+- [x] Spring Data JPA
