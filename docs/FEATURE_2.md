@@ -15,3 +15,7 @@ This feature will be implemented with the following alternatives:
 - [ ] Spring Boot + JOOQ
 - [ ] Spring Data JDBC
 - [x] Spring Data JPA
+
+```
+mvn generate-sources -pl spring-data-jpa
+```
