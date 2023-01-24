@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -31,9 +32,9 @@ public class Actor {
     @Column(name="last_name")
     private String last_name;
     @Column(name="last_update")
-    private String last_update;
+    private LocalDateTime last_update;
 
-    public Actor(Long actor_id, String first_name, String last_name, String last_update) {
+    public Actor(Long actor_id, String first_name, String last_name, LocalDateTime last_update) {
         this.actor_id = actor_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -54,7 +55,7 @@ public class Actor {
         return last_name;
     }
 
-    public String getLast_update() {
+    public LocalDateTime getLast_update() {
         return last_update;
     }
 
@@ -70,7 +71,7 @@ public class Actor {
         this.last_name = last_name;
     }
 
-    public void setLast_update(String last_update) {
+    public void setLast_update(LocalDateTime last_update) {
         this.last_update = last_update;
     }
 

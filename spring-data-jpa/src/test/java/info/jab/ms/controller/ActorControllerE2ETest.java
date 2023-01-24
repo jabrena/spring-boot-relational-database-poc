@@ -1,17 +1,25 @@
 package info.jab.ms.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import info.jab.ms.commons.AbstractIntegrationTest;
-import info.jab.ms.service.ActorDTO;
+import info.jab.ms.service.dto.ActorDTO;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -46,26 +54,181 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void should_add_a_new_actor() throws JSONException {
+    public void should_add_a_new_actor() throws JSONException, JsonProcessingException {
 
         //Given
         String address = "http://localhost:" + port + "/api/v1/actors";
 
         //When
         HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        ResponseEntity<List<ActorDTO>> result =
+        ActorDTO actor = new ActorDTO(null, "Demo", "Demo2", LocalDateTime.now().toString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String payload = mapper.writeValueAsString(actor);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(payload, headers);
+
+        ResponseEntity<ActorDTO> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.POST,
-                        null,
-                        new ParameterizedTypeReference<>() {}
+                        requestEntity,
+                        ActorDTO.class
                 );
 
         //Then
         then(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-
+        then(result.getBody().actor_id()).isNotNull();
     }
 
+    @Test
+    public void should_return_one_actor() {
+
+        //Given
+        String address = "http://localhost:" + port + "/api/v1/actors/1";
+
+        //When
+        ResponseEntity<ActorDTO> result =
+                restTemplate.exchange(
+                        address,
+                        HttpMethod.GET,
+                        null,
+                        ActorDTO.class
+                );
+
+        //Then
+        then(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        then(result.getBody().actor_id()).isNotNull();
+    }
+
+    @Test
+    public void should_not_return_one_actor() {
+
+        //Given
+        String address = "http://localhost:" + port + "/api/v1/actors/999";
+
+        //When
+        ResponseEntity<ActorDTO> result =
+                restTemplate.exchange(
+                        address,
+                        HttpMethod.GET,
+                        null,
+                        ActorDTO.class
+                );
+
+        //Then
+        then(result.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void should_remove_one_actor() throws JsonProcessingException {
+
+        //Given
+        ActorDTO initialActor = new ActorDTO(null, "Curro", "Jimenez", LocalDateTime.now().toString());
+        ActorDTO newActor = addOneActorForTesting(initialActor);
+        System.out.println(newActor);
+        String address = "http://localhost:" + port + "/api/v1/actors/" + newActor.actor_id();
+
+        //When
+        ResponseEntity<ActorDTO> result =
+                restTemplate.exchange(
+                        address,
+                        HttpMethod.DELETE,
+                        null,
+                        ActorDTO.class
+                );
+
+        //Then
+        then(result.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+    }
+
+    private ActorDTO addOneActorForTesting(ActorDTO actorToAdd) throws JsonProcessingException {
+        //Given
+        String address = "http://localhost:" + port + "/api/v1/actors";
+
+        //When
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String payload = mapper.writeValueAsString(actorToAdd);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(payload, headers);
+
+        ResponseEntity<ActorDTO> result =
+                restTemplate.exchange(
+                        address,
+                        HttpMethod.POST,
+                        requestEntity,
+                        ActorDTO.class
+                );
+
+        return result.getBody();
+    }
+
+    @Test
+    public void should_update_one_actor() throws JsonProcessingException {
+
+        //Given
+        ActorDTO initialActor = new ActorDTO(null, "Curro", "Jimenez", LocalDateTime.now().toString());
+        ActorDTO actorAdded = addOneActorForTesting(initialActor);
+        System.out.println(actorAdded);
+        String address = "http://localhost:" + port + "/api/v1/actors/" + actorAdded.actor_id();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ActorDTO actorDataToUpgrade = new ActorDTO(null, "Currito", "Jimenez", LocalDateTime.now().toString());
+        ObjectMapper mapper = new ObjectMapper();
+        String payload = mapper.writeValueAsString(actorDataToUpgrade);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(payload, headers);
+
+        //When
+        ResponseEntity<ActorDTO> result =
+                restTemplate.exchange(
+                        address,
+                        HttpMethod.PUT,
+                        requestEntity,
+                        ActorDTO.class
+                );
+
+        //Then
+        then(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        then(result.getBody().first_name()).isEqualTo("Currito");
+    }
+
+    @Test
+    public void should_not_update_an_unknown_actor() throws JsonProcessingException {
+
+        //Given
+        String address = "http://localhost:" + port + "/api/v1/actors/999";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ActorDTO actorDataToUpgrade = new ActorDTO(null, "Currito", "Jimenez", LocalDateTime.now().toString());
+        ObjectMapper mapper = new ObjectMapper();
+        String payload = mapper.writeValueAsString(actorDataToUpgrade);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(payload, headers);
+
+        //When
+        ResponseEntity<ActorDTO> result =
+                restTemplate.exchange(
+                        address,
+                        HttpMethod.PUT,
+                        requestEntity,
+                        ActorDTO.class
+                );
+
+        //Then
+        then(result.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
 }
