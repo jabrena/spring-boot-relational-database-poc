@@ -12,12 +12,12 @@ CREATE TABLE actor (
 This feature will be implemented with the following alternatives:
 
 - [ ] Spring Boot + JDBC
-- [ ] Spring Boot + JOOQ
-- [ ] Spring Data JDBC
+- [x] Spring Boot + JOOQ
+- [x] Spring Data JDBC
 - [x] Spring Data JPA
 
 ```
 mvn generate-sources -pl spring-data-jpa
 mvn generate-sources -pl spring-data-jdbc
-
+mvn generate-sources -pl spring-boot-jooq
 ```
