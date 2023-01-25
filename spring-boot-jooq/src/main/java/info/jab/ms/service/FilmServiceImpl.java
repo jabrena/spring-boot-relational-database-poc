@@ -1,14 +1,16 @@
-package info.jab.ms;
+package info.jab.ms.service;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
+
+import info.jab.ms.model.Film;
 
 import java.util.List;
 
 import static info.jab.ms.jooq.tables.Film.FILM;
 
 @Service
-class FilmServiceImpl implements FilmService {
+public class FilmServiceImpl implements FilmService {
 
     private final DSLContext dsl;
 
