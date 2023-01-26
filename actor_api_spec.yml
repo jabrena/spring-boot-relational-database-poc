@@ -6,13 +6,13 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 tags:
-  - name: api
-    description: the api API
+  - name: actors
+    description: REST endpoints over the Actor Entity/AggregateRoot  in Sakila DB
 paths:
   /api/v1/actors:
     get:
       tags:
-        - api
+        - actors
       operationId: get_actors
       responses:
         '200':
@@ -23,7 +23,7 @@ paths:
                 $ref: '#/components/schemas/Actors'
     post:
       tags:
-        - api
+        - actors
       operationId: add_actor
       requestBody:
         required: true
@@ -41,7 +41,7 @@ paths:
   /api/v1/actors/{id}:
     get:
       tags:
-        - api
+        - actors
       operationId: get_actor
       parameters:
         - name: id
@@ -62,7 +62,7 @@ paths:
           description: Not found
     put:
       tags:
-        - api
+        - actors
       operationId: update_actor
       parameters:
         - name: id
@@ -89,7 +89,7 @@ paths:
           description: Not found
     delete:
       tags:
-        - api
+        - actors
       operationId: delete_actor
       parameters:
         - name: id

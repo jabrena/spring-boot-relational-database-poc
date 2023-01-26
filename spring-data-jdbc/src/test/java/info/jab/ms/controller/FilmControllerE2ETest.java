@@ -1,7 +1,6 @@
 package info.jab.ms.controller;
 
 import info.jab.ms.commons.AbstractIntegrationTest;
-import info.jab.ms.service.dto.FilmDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +23,8 @@ class FilmControllerE2ETest extends AbstractIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    record FilmDTO(Integer FILM_ID, String TITLE) {}
 
     @Test
     public void should_be_Ok() {
