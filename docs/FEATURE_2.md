@@ -1,4 +1,4 @@
-# Feature 2: CRUD for the Entity Actor
+# Feature 2: CRUD / CRUD for the Entity Actor
 
 ```sql
 CREATE TABLE actor (
@@ -11,7 +11,7 @@ CREATE TABLE actor (
 
 This feature will be implemented with the following alternatives:
 
-- [ ] Spring Boot + JDBC
+- [x] Spring Boot + JDBC
 - [x] Spring Boot + JOOQ
 - [x] Spring Data JDBC
 - [x] Spring Data JPA
@@ -20,4 +20,5 @@ This feature will be implemented with the following alternatives:
 mvn generate-sources -pl spring-data-jpa
 mvn generate-sources -pl spring-data-jdbc
 mvn generate-sources -pl spring-boot-jooq
+mvn generate-sources -pl spring-boot-jdbc
 ```

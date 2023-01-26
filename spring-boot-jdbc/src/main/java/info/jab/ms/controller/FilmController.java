@@ -1,7 +1,8 @@
-package info.jab.ms;
+package info.jab.ms.controller;
 
+import info.jab.ms.service.FilmService;
+import info.jab.ms.service.dto.FilmDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ public class FilmController {
     private FilmService filmService;
 
     @GetMapping(value = "/films")
-    public List<Film> getData() {
+    public List<FilmDTO> getData() {
         return filmService.getFilms();
     }
 }
