@@ -1,4 +1,4 @@
-# Feature 1: List movies starting by A
+# Feature 1: Simple Query / List movies starting by A
 
 ```sql
 SELECT SELECT FILM_ID, TITLE

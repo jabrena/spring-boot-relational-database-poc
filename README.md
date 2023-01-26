@@ -14,8 +14,11 @@ actors, film-actor relationships, and a central inventory table that connects fi
 
 ## Features
 
-- [Feature 1: List movies starting by A](docs/FEATURE_1.md)
-- [Feature 2: CRUD for the Entity Actor](docs/FEATURE_2.md)
+- [Feature 1: Simple Query / List movies starting by A](docs/FEATURE_1.md)
+- [Feature 2: CRUD / CRUD for the Entity Actor](docs/FEATURE_2.md)
+- Feature 3: Transactions with @Transactional
+- Feature 4: Complex queries including join operations
+- Feature 5: Distributed transactions in Modular Monoliths
 
 Container stats:
 
