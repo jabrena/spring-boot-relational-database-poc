@@ -38,7 +38,11 @@ public class CountryServiceTest extends AbstractIntegrationTest {
         var cityCounterBefore = countryService.getCityCounter();
 
         //When
-        countryService.addCountryAndCity(false);
+        try {
+            countryService.addCountryAndCity(false);
+        } catch (RuntimeException ex) {
+            System.out.println(ex.getMessage());
+        }
 
         //Then
         var countryCounterAfter = countryService.getCountryCounter();

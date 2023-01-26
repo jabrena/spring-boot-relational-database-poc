@@ -50,6 +50,7 @@ public class CountryServiceImpl implements CountryService {
             System.out.println(result2);
         } catch (DataAccessException | DataIntegrityViolationException ex) {
             System.out.println("Katakroker");
+            throw new RuntimeException("Katakroker");
         }
     }
 }
