@@ -22,8 +22,8 @@ CREATE TABLE country (
 
 This feature will be implemented with the following alternatives:
 
-- [ ] Spring Boot + JDBC
-- [ ] Spring Boot + JOOQ
+- [x] Spring Boot + JDBC
+- [x] Spring Boot + JOOQ
 - [ ] Spring Data JDBC
 - [ ] Spring Data JPA
 
