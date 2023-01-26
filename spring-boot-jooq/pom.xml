@@ -111,11 +111,8 @@
 								db = new org.testcontainers.containers.PostgreSQLContainer("postgres:15.1-alpine")
 										.withUsername("${db.username}")
 										.withDatabaseName("postgres")
-										.withPassword("${db.password}");
-										//.withInitScript("postgres-sakila-db/postgres-sakila-schema.sql");
-
-								containerDelegate = new org.testcontainers.jdbc.JdbcDatabaseDelegate(db, "");
-								//org.testcontainers.ext.ScriptUtils.runInitScript(containerDelegate, "filesystem:src/main/resources/postgres-sakila-db/postgres-sakila-schema.sql");
+										.withPassword("${db.password}")
+										.withInitScript("${basedir}/src/main/resources/postgres-sakila-db/postgres-sakila-schema.sql");
 
 								db.start();
 								project.properties.setProperty('db.url', db.getJdbcUrl());
@@ -152,6 +149,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!--
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
@@ -173,6 +171,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 
 			<plugin>
 				<groupId>org.jooq</groupId>
