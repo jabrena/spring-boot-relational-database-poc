@@ -1,7 +1,7 @@
 package info.jab.ms.controller;
 
-import com.jab.ms.openapi.gen.api.ApiApi;
-import com.jab.ms.openapi.gen.model.ActorDto;
+import com.jab.ms.openapi.actor.gen.api.ApiApi;
+import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import info.jab.ms.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

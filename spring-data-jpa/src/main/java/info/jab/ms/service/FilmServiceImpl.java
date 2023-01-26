@@ -1,6 +1,6 @@
 package info.jab.ms.service;
 
-import info.jab.ms.service.dto.FilmDTO;
+import com.jab.ms.openapi.film.gen.model.FilmDto;
 import info.jab.ms.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,13 @@ class FilmServiceImpl implements FilmService {
     private FilmRepository filmRepository;
 
     @Override
-    public List<FilmDTO> getFilms() {
+    public List<FilmDto> getFilms() {
         return filmRepository.myQuery().stream()
-                .map(f -> new FilmDTO(f.getFilm_id(), f.getTitle()))
-                .toList();
+                .map(f -> {
+                    FilmDto film = new FilmDto();
+                    film.setFilmId(f.getFilm_id());
+                    film.setTitle(f.getTitle());
+                    return film;
+                }).toList();
     }
 }

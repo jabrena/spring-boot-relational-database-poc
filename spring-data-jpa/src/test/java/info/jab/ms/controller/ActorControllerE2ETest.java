@@ -2,7 +2,6 @@ package info.jab.ms.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jab.ms.openapi.gen.model.ActorDto;
 import info.jab.ms.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,7 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors";
 
         //When
-        ResponseEntity<List<ActorDto>> result =
+        ResponseEntity<List<ActorDTO>> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.GET,
@@ -97,17 +96,17 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors/1";
 
         //When
-        ResponseEntity<ActorDto> result =
+        ResponseEntity<ActorDTO> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.GET,
                         null,
-                        ActorDto.class
+                        ActorDTO.class
                 );
 
         //Then
         then(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-        then(result.getBody().getActorId()).isNotNull();
+        then(result.getBody().actor_id()).isNotNull();
     }
 
     @Test
@@ -117,12 +116,12 @@ class ActorControllerE2ETest extends AbstractIntegrationTest {
         String address = "http://localhost:" + port + "/api/v1/actors/999";
 
         //When
-        ResponseEntity<ActorDto> result =
+        ResponseEntity<ActorDTO> result =
                 restTemplate.exchange(
                         address,
                         HttpMethod.GET,
                         null,
-                        ActorDto.class
+                        ActorDTO.class
                 );
 
         //Then
