@@ -60,3 +60,4 @@ mvn versions:display-plugin-updates
 - https://github.com/fspacek/docker-postgres-sakila
 - https://www.pgadmin.org/
 - https://just.maciejwalkowiak.com/
+- https://openapi-generator.tech/docs/generators/spring

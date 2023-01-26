@@ -1,8 +1,9 @@
 package info.jab.ms.service;
 
 import com.jab.ms.openapi.actor.gen.model.ActorDto;
-import info.jab.ms.jooq.tables.pojos.JooqActor;
+import info.jab.ms.jooq.tables.daos.FilmRepository;
 import info.jab.ms.jooq.tables.records.ActorRecord;
+import info.jab.ms.jooq.tables.records.FilmRecord;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,28 @@ class ActorServiceImpl implements ActorService {
 
     @Override
     public List<ActorDto> getAll() {
-        return dsl.select(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
-                .from(ACTOR)
-                .fetchInto(ActorDto.class).stream()
-                .map(a -> {
-                    var actor = new ActorDto();
-                    actor.setActorId(a.getActorId());
-                    actor.setFirstName(a.getFirstName());
-                    actor.setLastName(a.getLastUpdate());
-                    actor.setLastUpdate(a.getLastUpdate().toString());
-                    return actor;
-                })
-                //.peek(System.out::println)
+        return dsl.selectFrom(ACTOR)
+                .fetch().stream()
+                .map(this::jooqToDtoMapper)
                 .toList();
+    }
+
+    private ActorDto jooqToDtoMapper(ActorRecord ar) {
+        return jooqToDtoMapper(
+                ar.getActorId(),
+                ar.getFirstName(),
+                ar.getLastName(),
+                ar.getLastUpdate());
+    }
+
+    private ActorDto jooqToDtoMapper(
+            Long actorId, String firstName, String lastName, LocalDateTime lastUpdate) {
+        var actor = new ActorDto();
+        actor.setActorId(actorId);
+        actor.setFirstName(firstName);
+        actor.setLastName(lastName);
+        actor.setLastUpdate(lastUpdate.toString());
+        return actor;
     }
 
     @Override
@@ -41,31 +51,29 @@ class ActorServiceImpl implements ActorService {
 
         org.jooq.Record result = dsl.insertInto(ACTOR, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
                         .values(newActor.getFirstName(), newActor.getLastName(), LocalDateTime.now())
-                        .returningResult(ACTOR.ACTOR_ID)
+                        .returningResult(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
                         .fetchOne();
 
-        var actorResponse = new ActorDto();
-        actorResponse.setActorId(result.getValue(ACTOR.ACTOR_ID));
-        actorResponse.setFirstName(newActor.getFirstName());
-        actorResponse.setLastName(newActor.getLastName());
-        actorResponse.setLastUpdate(newActor.getLastUpdate().toString());
-        return actorResponse;
+        return jooqToDtoMapper(
+                result.getValue(ACTOR.ACTOR_ID),
+                result.getValue(ACTOR.FIRST_NAME),
+                result.getValue(ACTOR.LAST_NAME),
+                result.getValue(ACTOR.LAST_UPDATE));
     }
 
     @Override
     public Optional<ActorDto> get(Long actorId) {
-        //TODO Refactor
-        var result = dsl.select(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
-                .from(ACTOR)
-                .where(ACTOR.ACTOR_ID.eq(actorId))
-                .fetchInto(JooqActor.class);
 
-        if( (result.size() == 1) && (result.get(0).getActorId() != null)) {
-            var actorResponse = new ActorDto();
-            actorResponse.setActorId(result.get(0).getActorId());
-            actorResponse.setFirstName(result.get(0).getFirstName());
-            actorResponse.setLastName(result.get(0).getLastName());
-            actorResponse.setLastUpdate(result.get(0).getLastUpdate().toString());
+        Optional<ActorRecord> result = dsl.selectFrom(ACTOR)
+                .where(ACTOR.ACTOR_ID.eq(actorId))
+                .fetchOptional();
+
+        if(result.isPresent()) {
+            var actorResponse = jooqToDtoMapper(
+                    result.get().getValue(ACTOR.ACTOR_ID),
+                    result.get().getValue(ACTOR.FIRST_NAME),
+                    result.get().getValue(ACTOR.LAST_NAME),
+                    result.get().getValue(ACTOR.LAST_UPDATE));
             return Optional.of(actorResponse);
         } else {
             return Optional.empty();
@@ -82,17 +90,18 @@ class ActorServiceImpl implements ActorService {
     @Override
     public ActorDto update(Long actorId, ActorDto newActorData) {
 
-        ActorRecord actorRecord = new ActorRecord();
-        actorRecord.setFirstName(newActorData.getFirstName());
-        actorRecord.setLastName(newActorData.getLastName());
-        actorRecord.setLastUpdate(LocalDateTime.now());
-        dsl.executeUpdate(actorRecord, ACTOR.ACTOR_ID.eq(actorId));
+        org.jooq.Record result = dsl.update(ACTOR)
+           .set(ACTOR.FIRST_NAME, newActorData.getFirstName())
+           .set(ACTOR.LAST_NAME, newActorData.getLastName())
+           .set(ACTOR.LAST_UPDATE, LocalDateTime.now())
+           .where(ACTOR.ACTOR_ID.eq(actorId))
+           .returningResult(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
+           .fetchOne();
 
-        var actorResponse = new ActorDto();
-        actorResponse.setActorId(actorId);
-        actorResponse.setFirstName(actorRecord.getFirstName());
-        actorResponse.setLastName(actorRecord.getLastName());
-        actorResponse.setLastUpdate(actorRecord.getLastUpdate().toString());
-        return actorResponse;
+        return jooqToDtoMapper(
+                result.getValue(ACTOR.ACTOR_ID),
+                result.getValue(ACTOR.FIRST_NAME),
+                result.getValue(ACTOR.LAST_NAME),
+                result.getValue(ACTOR.LAST_UPDATE));
     }
 }
