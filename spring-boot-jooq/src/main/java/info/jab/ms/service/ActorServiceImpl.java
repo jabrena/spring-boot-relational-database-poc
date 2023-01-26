@@ -1,9 +1,7 @@
 package info.jab.ms.service;
 
 import com.jab.ms.openapi.actor.gen.model.ActorDto;
-import info.jab.ms.jooq.tables.daos.FilmRepository;
 import info.jab.ms.jooq.tables.records.ActorRecord;
-import info.jab.ms.jooq.tables.records.FilmRecord;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,19 +22,19 @@ class ActorServiceImpl implements ActorService {
     public List<ActorDto> getAll() {
         return dsl.selectFrom(ACTOR)
                 .fetch().stream()
-                .map(this::jooqToDtoMapper)
+                .map(this::mapperToDto)
                 .toList();
     }
 
-    private ActorDto jooqToDtoMapper(ActorRecord ar) {
-        return jooqToDtoMapper(
+    private ActorDto mapperToDto(ActorRecord ar) {
+        return mapperToDto(
                 ar.getActorId(),
                 ar.getFirstName(),
                 ar.getLastName(),
                 ar.getLastUpdate());
     }
 
-    private ActorDto jooqToDtoMapper(
+    private ActorDto mapperToDto(
             Long actorId, String firstName, String lastName, LocalDateTime lastUpdate) {
         var actor = new ActorDto();
         actor.setActorId(actorId);
@@ -54,7 +52,7 @@ class ActorServiceImpl implements ActorService {
                         .returningResult(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
                         .fetchOne();
 
-        return jooqToDtoMapper(
+        return mapperToDto(
                 result.getValue(ACTOR.ACTOR_ID),
                 result.getValue(ACTOR.FIRST_NAME),
                 result.getValue(ACTOR.LAST_NAME),
@@ -69,7 +67,7 @@ class ActorServiceImpl implements ActorService {
                 .fetchOptional();
 
         if(result.isPresent()) {
-            var actorResponse = jooqToDtoMapper(
+            var actorResponse = mapperToDto(
                     result.get().getValue(ACTOR.ACTOR_ID),
                     result.get().getValue(ACTOR.FIRST_NAME),
                     result.get().getValue(ACTOR.LAST_NAME),
@@ -98,7 +96,7 @@ class ActorServiceImpl implements ActorService {
            .returningResult(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
            .fetchOne();
 
-        return jooqToDtoMapper(
+        return mapperToDto(
                 result.getValue(ACTOR.ACTOR_ID),
                 result.getValue(ACTOR.FIRST_NAME),
                 result.getValue(ACTOR.LAST_NAME),
