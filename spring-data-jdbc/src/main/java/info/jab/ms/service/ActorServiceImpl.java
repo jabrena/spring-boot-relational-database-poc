@@ -1,6 +1,6 @@
 package info.jab.ms.service;
 
-import com.jab.ms.openapi.gen.model.ActorDto;
+import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import info.jab.ms.model.Actor;
 import info.jab.ms.repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

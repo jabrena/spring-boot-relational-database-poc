@@ -1,7 +1,7 @@
 package info.jab.ms.controller;
 
-import com.jab.ms.openapi.gen.api.ApiApi;
-import com.jab.ms.openapi.gen.model.FilmDto;
+import com.jab.ms.openapi.film.gen.api.ApiApi;
+import com.jab.ms.openapi.film.gen.model.FilmDto;
 import info.jab.ms.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

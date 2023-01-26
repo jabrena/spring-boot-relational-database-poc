@@ -2,7 +2,7 @@ package info.jab.ms.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jab.ms.openapi.gen.model.ActorDto;
+import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import info.jab.ms.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package info.jab.ms.service;
 
-import com.jab.ms.openapi.gen.model.FilmDto;
+import com.jab.ms.openapi.film.gen.model.FilmDto;
 import info.jab.ms.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
