@@ -1,6 +1,9 @@
 package info.jab.ms.controller;
 
+import com.jab.ms.openapi.film.gen.api.ApiApi;
+import com.jab.ms.openapi.film.gen.model.FilmDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,13 +16,12 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "api/v1", produces = APPLICATION_JSON_VALUE)
-public class FilmController {
+public class FilmController implements ApiApi {
     @Autowired
     private FilmService filmService;
 
-    @GetMapping(value = "/films")
-    public List<Film> getData() {
-        return filmService.getFilms();
+    @Override
+    public ResponseEntity<List<FilmDto>> getFilms() {
+        return ResponseEntity.ok().body(filmService.getFilms());
     }
 }

@@ -1,6 +1,6 @@
 package info.jab.ms.service;
 
-import com.jab.ms.openapi.gen.model.ActorDto;
+import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import info.jab.ms.jooq.tables.pojos.JooqActor;
 import info.jab.ms.jooq.tables.records.ActorRecord;
 import org.jooq.DSLContext;
