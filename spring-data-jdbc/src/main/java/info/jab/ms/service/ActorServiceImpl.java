@@ -19,16 +19,18 @@ class ActorServiceImpl implements ActorService {
     @Override
     public List<ActorDto> getAll() {
         return actorRepository.findAll().stream()
-                .map(a -> {
-                    var actor = new ActorDto();
-                    actor.setActorId(a.getActor_id());
-                    actor.setFirstName(a.getFirst_name());
-                    actor.setLastName(a.getLast_name());
-                    actor.setLastUpdate(a.getLast_update().toString());
-                    return actor;
-                })
+                .map(this::mapperToDto)
                 //.peek(System.out::println)
                 .toList();
+    }
+
+    private ActorDto mapperToDto(Actor a) {
+        var actor = new ActorDto();
+        actor.setActorId(a.getActor_id());
+        actor.setFirstName(a.getFirst_name());
+        actor.setLastName(a.getLast_name());
+        actor.setLastUpdate(a.getLast_update().toString());
+        return actor;
     }
 
     @Override
@@ -38,14 +40,7 @@ class ActorServiceImpl implements ActorService {
         actor.setLast_name(newActor.getLastName());
         actor.setLast_update(LocalDateTime.now());
 
-        actor = actorRepository.save(actor);
-
-        var actorResponse = new ActorDto();
-        actorResponse.setActorId(actor.getActor_id());
-        actorResponse.setFirstName(actor.getFirst_name());
-        actorResponse.setLastName(actor.getLast_name());
-        actorResponse.setLastUpdate(actor.getLast_update().toString());
-        return actorResponse;
+        return mapperToDto(actorRepository.save(actor));
     }
 
     @Override
@@ -77,13 +72,6 @@ class ActorServiceImpl implements ActorService {
         actorToUpgrade.setLast_name(newActorData.getLastName());
         actorToUpgrade.setLast_update(LocalDateTime.now());
 
-        Actor actorUpdated = actorRepository.save(actorToUpgrade);
-        var actorResponse = new ActorDto();
-        actorResponse.setActorId(actorUpdated.getActor_id());
-        actorResponse.setFirstName(actorUpdated.getFirst_name());
-        actorResponse.setLastName(actorUpdated.getLast_name());
-        actorResponse.setLastUpdate(actorUpdated.getLast_update().toString());
-
-        return actorResponse;
+        return mapperToDto(actorRepository.save(actorToUpgrade));
     }
 }
