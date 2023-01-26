@@ -1,6 +1,6 @@
 package info.jab.ms.service;
 
-import info.jab.ms.service.dto.FilmDTO;
+import com.jab.ms.openapi.film.gen.model.FilmDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ class FilmServiceImpl implements FilmService {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<FilmDTO> getFilms() {
+    public List<FilmDto> getFilms() {
         String sql =
 """
 SELECT FILM_ID, TITLE
@@ -24,8 +24,11 @@ WHERE title LIKE 'A%'
 
         return jdbcTemplate.query(
                 sql,
-                (rs, rowNum) -> new FilmDTO(
-                        rs.getInt("FILM_ID"),
-                        rs.getString("TITLE")));
+                (rs, rowNum) -> {
+                    FilmDto film = new FilmDto();
+                    film.setFilmId(rs.getLong("FILM_ID"));
+                    film.setTitle(rs.getString("TITLE"));
+                    return film;
+                });
     }
 }

@@ -1,6 +1,6 @@
 package info.jab.ms.service;
 
-import com.jab.ms.openapi.gen.model.ActorDto;
+import com.jab.ms.openapi.actor.gen.model.ActorDto;
 
 import java.util.List;
 import java.util.Optional;
