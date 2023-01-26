@@ -2,7 +2,6 @@ package info.jab.ms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,7 @@ public class CountryServiceImpl implements CountryService {
         Long result = Long.parseLong(generatedKeyHolder.getKeys().get("country_id").toString());
 
         try {
-            var countryId = (flag == Boolean.TRUE) ? result : 999L;
+            var countryId = (flag == Boolean.FALSE) ? result : 999L;
             var sql2 = "INSERT INTO city (city, country_id, last_update) VALUES (?, ?, ?)";
             jdbcTemplate.update(sql2, "TabarniaCity", countryId, LocalDateTime.now());
 

@@ -1,6 +1,7 @@
 package info.jab.ms.service;
 
 import info.jab.ms.commons.AbstractIntegrationTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,8 @@ public class CountryServiceTest extends AbstractIntegrationTest {
         var cityCounterBefore = countryService.getCityCounter();
 
         //When
-        countryService.addCountryAndCity(true);
+        var forced_to_fail = false;
+        countryService.addCountryAndCity(forced_to_fail);
 
         //Then
         var countryCounterAfter = countryService.getCountryCounter();
@@ -38,11 +40,11 @@ public class CountryServiceTest extends AbstractIntegrationTest {
         var cityCounterBefore = countryService.getCityCounter();
 
         //When
-        try {
-            countryService.addCountryAndCity(false);
-        } catch (RuntimeException ex) {
-            System.out.println(ex.getMessage());
-        }
+        var forced_to_fail = true;
+        RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
+            countryService.addCountryAndCity(forced_to_fail);
+        });
+        Assertions.assertEquals("Katakroker", thrown.getMessage());
 
         //Then
         var countryCounterAfter = countryService.getCountryCounter();
