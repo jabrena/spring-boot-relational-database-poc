@@ -112,7 +112,9 @@
 										.withUsername("${db.username}")
 										.withDatabaseName("postgres")
 										.withPassword("${db.password}")
-										.withInitScript("${basedir}/src/main/resources/postgres-sakila-db/postgres-sakila-schema.sql");
+										.withCopyFileToContainer(
+												org.testcontainers.utility.MountableFile.forHostPath("src/main/resources/postgres-sakila-db/postgres-sakila-schema.sql"),
+												"/docker-entrypoint-initdb.d/postgres-sakila-schema.sql");
 
 								db.start();
 								project.properties.setProperty('db.url', db.getJdbcUrl());
