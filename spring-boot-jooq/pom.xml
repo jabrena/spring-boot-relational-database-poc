@@ -227,7 +227,6 @@
 								<target>
 									<clean>true</clean>
 									<packageName>info.jab.ms.jooq</packageName>
-									<directory>src/main/jooq</directory>
 								</target>
 							</generator>
 						</configuration>
@@ -244,23 +243,6 @@
 						<db.password>${db.password}</db.password>
 					</systemPropertyVariables>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/main/jooq</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
             <plugin>
                 <groupId>org.openapitools</groupId>
