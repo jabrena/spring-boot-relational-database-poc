@@ -14,9 +14,9 @@ actors, film-actor relationships, and a central inventory table that connects fi
 
 ## Features
 
-- [Feature 1: Simple Query / List movies starting by A](docs/FEATURE_1.md)
-- [Feature 2: CRUD / CRUD for the Entity Actor](docs/FEATURE_2.md)
-- [Feature 3: Transactions with @Transactional](docs/FEATURE_3.md)
+- [Feature 1: Simple Query / List movies starting by A](docs/features/FEATURE_1.md)
+- [Feature 2: CRUD / CRUD for the Entity Actor](docs/features/FEATURE_2.md)
+- [Feature 3: Transactions with @Transactional](docs/features/FEATURE_3.md)
 - Feature 4: Complex queries including join operations
 - Feature 5: Distributed transactions in Modular Monoliths
 
@@ -52,6 +52,8 @@ mvn versions:display-plugin-updates
 - https://docs.spring.io/spring-boot/docs/current/reference/html/data.html#data.sql.jooq
 - https://www.jooq.org/doc/3.17/manual-single-page/
 - https://github.com/spring-projects/spring-data-examples
+- https://mybatis.org/spring-boot-starter/
+- https://mybatis.org/spring/
 - https://hub.docker.com/_/postgres
 - https://www.testcontainers.org/supported_docker_environment/logging_config/
 - https://www.testcontainers.org/modules/databases/jdbc/
