@@ -3,6 +3,7 @@ package info.jab.ms.service;
 import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import info.jab.ms.model.Actor;
 import info.jab.ms.repository.ActorRepository;
+import info.jab.ms.mapper.ActorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,11 @@ class ActorServiceImpl implements ActorService {
     @Override
     public List<ActorDto> getAll() {
         return actorRepository.findAll().stream()
-                .map(this::mapperToDto)
+                .map(ActorMapper.INSTANCE::actorToActorDto)
                 .toList();
     }
 
+    @Deprecated
     private ActorDto mapperToDto(Actor a) {
         var actor = new ActorDto();
         actor.setActorId(a.getActor_id());
@@ -39,7 +41,7 @@ class ActorServiceImpl implements ActorService {
         actor.setLast_name(newActor.getLastName());
         actor.setLast_update(LocalDateTime.now());
 
-        return mapperToDto(actorRepository.save(actor));
+        return ActorMapper.INSTANCE.actorToActorDto(actorRepository.save(actor));
     }
 
     @Override
@@ -71,6 +73,6 @@ class ActorServiceImpl implements ActorService {
         actorToUpgrade.setLast_name(newActorData.getLastName());
         actorToUpgrade.setLast_update(LocalDateTime.now());
 
-        return mapperToDto(actorRepository.save(actorToUpgrade));
+        return ActorMapper.INSTANCE.actorToActorDto(actorRepository.save(actorToUpgrade));
     }
 }
