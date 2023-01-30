@@ -14,9 +14,9 @@ public class LayeredArchitectureTest {
             .consideringAllDependencies()
             .layer("Controllers").definedBy("..controller..")
             .layer("Services").definedBy("..service..")
-            //.layer("Persistence").definedBy("..repository..")
+            .layer("Persistence").definedBy("..repository..")
 
             .whereLayer("Controllers").mayNotBeAccessedByAnyLayer()
-            .whereLayer("Services").mayOnlyBeAccessedByLayers("Controllers");
-            //.whereLayer("Persistence").mayOnlyBeAccessedByLayers("Services");
+            .whereLayer("Services").mayOnlyBeAccessedByLayers("Controllers")
+            .whereLayer("Persistence").mayOnlyBeAccessedByLayers("Services");
 }
