@@ -33,7 +33,8 @@ c2305a197f88   spring-boot-postgresql-sakiladb-1   0.05%     80.16MiB / 7.764GiB
 
 ## How to build in local
 
-```
+```bash
+sdk env
 mvn verify
 ```
 

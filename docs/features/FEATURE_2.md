@@ -13,6 +13,7 @@ This feature will be implemented with the following alternatives:
 
 - [x] Spring Boot + JDBC
 - [x] Spring Boot + JOOQ
+- [x] Spring Boot + MyBatis
 - [x] Spring Data JDBC
 - [x] Spring Data JPA
 
