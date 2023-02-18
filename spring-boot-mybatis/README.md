@@ -36,3 +36,5 @@
 - https://mybatis.org/spring/
 - http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
 - https://mybatis.org/generator/running/runningWithMaven.html
+- https://mybatis.org/generator/configreference/context.html
+- https://mybatis.org/generator/reference/plugins.html

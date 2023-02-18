@@ -1,32 +1,69 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <context id="simple" targetRuntime="MyBatis3">
+
+    <!--
+    targetRuntime="MyBatis3DynamicSql"
+    targetRuntime="MyBatis3"
+    -->
+    <context id="simple" targetRuntime="MyBatis3DynamicSql">
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
         <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true" />
         </commentGenerator>
 
         <jdbcConnection driverClass="org.testcontainers.jdbc.ContainerDatabaseDriver"
-            connectionURL="jdbc:tc:postgresql:15.2:///sakila?TC_DAEMON=true&amp;TC_INITSCRIPT=file:spring-boot-mybatis/target/classes/sql/step_1.sql"
+            connectionURL="jdbc:tc:postgresql:15.2:///sakila?TC_DAEMON=true&amp;TC_INITSCRIPT=file:spring-boot-mybatis/src/main/resources/sql/step_1.sql"
             userId="postgres" password="sakila" />
 
         <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
             <property name="useJSR310Types" value="true" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.example.generated.model" targetProject="spring-boot-mybatis/src/main/java" />
+        <javaModelGenerator
+                targetPackage="info.jab.ms.mybatis.generated.model"
+                targetProject="spring-boot-mybatis/src/main/java">
 
-        <sqlMapGenerator targetPackage="com.example.generated.mapper" targetProject="spring-boot-mybatis/src/main/resources" />
+            <!--
+            <property name="enableSubPackages" value="true"/>
+            -->
+            <property name="trimStrings" value="true"/>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.generated.mapper"
+        </javaModelGenerator>
+
+        <sqlMapGenerator
+                targetPackage="info.jab.ms.mybatis.generated.mapper"
+                targetProject="spring-boot-mybatis/src/main/resources" />
+
+        <!--
+        type="ANNOTATEDMAPPER"
+        type="XMLMAPPER"
+        -->
+        <javaClientGenerator
+            type="ANNOTATEDMAPPER"
+            targetPackage="info.jab.ms.mybatis.generated.mapper"
             targetProject="spring-boot-mybatis/src/main/java" />
 
+        <!--
         <table schema="public" tableName="actor" domainObjectName="Actor" />
         <table schema="public" tableName="film" domainObjectName="Film" />
         <table schema="public" tableName="film_actor" domainObjectName="FilmActor" />
+        -->
+
+        <table schema="public"
+               tableName="country"
+               enableCountByExample="true"
+               enableDeleteByExample="true"
+               enableDeleteByPrimaryKey="true"
+               enableInsert="true"
+               enableSelectByExample="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByExample="true"
+               enableUpdateByPrimaryKey="true"/>
 
     </context>
 </generatorConfiguration>
