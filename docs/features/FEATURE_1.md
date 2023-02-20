@@ -1,7 +1,7 @@
 # Feature 1: Simple Query / List movies starting by A
 
 ```sql
-SELECT SELECT FILM_ID, TITLE
+SELECT FILM_ID, TITLE
 FROM film
 WHERE title LIKE 'A%'
 ```
