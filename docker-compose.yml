@@ -31,7 +31,7 @@ services:
     image: schemaspy/schemaspy
     container_name: schemaspy
     volumes:
-      - ./spy_data:/output
+      - ./docs/spy_data:/output
     depends_on:
       - sakiladb
     entrypoint: ["/entrypoint.sh", "-t", "pgsql", "-db", "postgres",
@@ -44,7 +44,7 @@ services:
     image: nginx:latest
     container_name: nginx_schemaspy
     volumes:
-      - ./spy_data:/usr/share/nginx/html
+      - ./docs/spy_data:/usr/share/nginx/html
     ports:
       - "99:80"
     depends_on:
