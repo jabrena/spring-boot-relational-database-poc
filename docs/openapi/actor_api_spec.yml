@@ -1,0 +1,131 @@
+openapi: 3.0.1
+info:
+  title: Actor API
+  version: v1
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: actors
+    description: REST endpoints over the Actor Entity/AggregateRoot  in Sakila DB
+paths:
+  /api/v1/actors:
+    get:
+      tags:
+        - actors
+      operationId: get_actors
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actors'
+    post:
+      tags:
+        - actors
+      operationId: add_actor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'
+  /api/v1/actors/{id}:
+    get:
+      tags:
+        - actors
+      operationId: get_actor
+      parameters:
+        - name: id
+          in: path
+          description: Actor ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'
+        '404':
+          description: Not found
+    put:
+      tags:
+        - actors
+      operationId: update_actor
+      parameters:
+        - name: id
+          in: path
+          description: Actor ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Actor'
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - actors
+      operationId: delete_actor
+      parameters:
+        - name: id
+          in: path
+          description: Actor ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not found
+components:
+  schemas:
+    Actors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Actor'
+    Actor:
+      type: object
+      properties:
+        actor_id:
+          type: integer
+          format: int64
+          description: unique identifier for any actor
+        first_name:
+          type: string
+          format: int64
+          description: first name
+        last_name:
+          type: string
+          format: int64
+          description: last name
+        last_update:
+          type: string
+          format: int64
+          description: last time that actor data was updated

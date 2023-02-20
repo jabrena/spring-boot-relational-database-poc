@@ -26,11 +26,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jooq</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-jooq</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -257,7 +257,7 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/../actor_api_spec.yml
+								${project.basedir}/../docs/openapi/actor_api_spec.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<library>spring-boot</library>
@@ -284,7 +284,7 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/../film_api_spec.yml
+								${project.basedir}/../docs/openapi/film_api_spec.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<library>spring-boot</library>

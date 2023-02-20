@@ -20,6 +20,7 @@
         <module>spring-data-jpa</module>
         <module>spring-boot-jdbc</module>
         <module>spring-boot-jooq</module>
+        <module>spring-boot-mybatis</module>
     </modules>
 
     <build>
@@ -47,7 +48,7 @@
                         </goals>
                         <configuration>
                             <inputFile>
-                                ${project.basedir}/actor_api_spec.yml
+                                ${project.basedir}/docs/openapi/actor_api_spec.yml
                             </inputFile>
                             <validateInfoLicense>false</validateInfoLicense>
                             <validateInfoDescription>false</validateInfoDescription>
@@ -74,7 +75,7 @@
                         </goals>
                         <configuration>
                             <inputFile>
-                                ${project.basedir}/film_api_spec.yml
+                                ${project.basedir}/docs/openapi/film_api_spec.yml
                             </inputFile>
                             <validateInfoLicense>false</validateInfoLicense>
                             <validateInfoDescription>false</validateInfoDescription>
