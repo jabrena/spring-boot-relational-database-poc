@@ -1,6 +1,6 @@
 package info.jab.ms.repository;
 
-import info.jab.ms.model.Country;
+import info.jab.ms.model.CountryOld;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -25,7 +25,7 @@ public interface CountryMapperRepository {
 
     @Insert(sqlInsert)
     @Options(useGeneratedKeys = true, keyProperty = "country_id")
-    void save(Country country);
+    void save(CountryOld country);
 }
 
 

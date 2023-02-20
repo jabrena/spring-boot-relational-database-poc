@@ -12,7 +12,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 public class CountryServiceTest extends AbstractIntegrationTest {
 
     @Autowired
-    private CountryService countryService;
+    private Feature3Service countryService;
 
     @Test
     void should_make_the_transaction() {
