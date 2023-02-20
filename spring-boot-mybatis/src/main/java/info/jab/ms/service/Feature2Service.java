@@ -5,7 +5,7 @@ import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import java.util.List;
 import java.util.Optional;
 
-public interface ActorService {
+public interface Feature2Service {
 
     List<ActorDto> getAll();
     ActorDto add(ActorDto newActor);

@@ -4,7 +4,7 @@ import com.jab.ms.openapi.film.gen.model.FilmDto;
 
 import java.util.List;
 
-public interface FilmService {
+public interface Feature1Service {
 
     List<FilmDto> getFilms();
 }

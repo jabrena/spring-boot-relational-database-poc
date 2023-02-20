@@ -2,6 +2,10 @@
 <generatorConfiguration>
 
     <!--
+    <properties resource="./generatorConfig.properties"/>
+    -->
+
+    <!--
     targetRuntime="MyBatis3DynamicSql"
     targetRuntime="MyBatis3"
     -->
@@ -24,6 +28,9 @@
             <property name="useJSR310Types" value="true" />
         </javaTypeResolver>
 
+        <!--
+        targetProject="spring-boot-mybatis/target/generated-sources"
+        -->
         <javaModelGenerator
                 targetPackage="info.jab.ms.mybatis.generated.model"
                 targetProject="spring-boot-mybatis/src/main/java">
@@ -35,10 +42,6 @@
 
         </javaModelGenerator>
 
-        <sqlMapGenerator
-                targetPackage="info.jab.ms.mybatis.generated.mapper"
-                targetProject="spring-boot-mybatis/src/main/resources" />
-
         <!--
         type="ANNOTATEDMAPPER"
         type="XMLMAPPER"
@@ -48,22 +51,10 @@
             targetPackage="info.jab.ms.mybatis.generated.mapper"
             targetProject="spring-boot-mybatis/src/main/java" />
 
-        <!--
-        <table schema="public" tableName="actor" domainObjectName="Actor" />
-        <table schema="public" tableName="film" domainObjectName="Film" />
-        <table schema="public" tableName="film_actor" domainObjectName="FilmActor" />
-        -->
-
-        <table schema="public"
-               tableName="country"
-               enableCountByExample="true"
-               enableDeleteByExample="true"
-               enableDeleteByPrimaryKey="true"
-               enableInsert="true"
-               enableSelectByExample="true"
-               enableSelectByPrimaryKey="true"
-               enableUpdateByExample="true"
-               enableUpdateByPrimaryKey="true"/>
+        <table schema="public" tableName="actor" domainObjectName="ActorTable" />
+        <table schema="public" tableName="film" domainObjectName="FilmTable" />
+        <table schema="public" tableName="country" domainObjectName="CountryTable" />
+        <table schema="public" tableName="city" domainObjectName="CityTable" />
 
     </context>
 </generatorConfiguration>

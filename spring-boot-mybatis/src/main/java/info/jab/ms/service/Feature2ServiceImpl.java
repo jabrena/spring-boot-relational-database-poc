@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-class ActorServiceImpl implements ActorService {
+class Feature2ServiceImpl implements Feature2Service {
 
     @Autowired
     private ActorMapperRepository actorRepository;

@@ -1,9 +1,9 @@
 package info.jab.ms.mybatis.generated.model;
 
+import jakarta.annotation.Generated;
 import java.time.LocalDateTime;
-import javax.annotation.Generated;
 
-public class Country {
+public class CountryTable {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Integer countryId;
 
@@ -55,7 +55,7 @@ public class Country {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Country other = (Country) that;
+        CountryTable other = (CountryTable) that;
         return (this.getCountryId() == null ? other.getCountryId() == null : this.getCountryId().equals(other.getCountryId()))
             && (this.getCountry() == null ? other.getCountry() == null : this.getCountry().equals(other.getCountry()))
             && (this.getLastUpdate() == null ? other.getLastUpdate() == null : this.getLastUpdate().equals(other.getLastUpdate()));

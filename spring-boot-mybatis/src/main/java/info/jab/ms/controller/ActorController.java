@@ -2,7 +2,7 @@ package info.jab.ms.controller;
 
 import com.jab.ms.openapi.actor.gen.api.ApiApi;
 import com.jab.ms.openapi.actor.gen.model.ActorDto;
-import info.jab.ms.service.ActorService;
+import info.jab.ms.service.Feature2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class ActorController implements ApiApi{
     @Autowired
-    private ActorService actorService;
+    private Feature2Service actorService;
 
     @Override
     public ResponseEntity<List<ActorDto>> getActors() {
