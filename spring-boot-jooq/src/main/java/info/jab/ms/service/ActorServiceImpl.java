@@ -35,9 +35,9 @@ class ActorServiceImpl implements ActorService {
     }
 
     private ActorDto mapperToDto(
-            Long actorId, String firstName, String lastName, LocalDateTime lastUpdate) {
+            Integer actorId, String firstName, String lastName, LocalDateTime lastUpdate) {
         var actor = new ActorDto();
-        actor.setActorId(actorId);
+        actor.setActorId(Long.valueOf(actorId));
         actor.setFirstName(firstName);
         actor.setLastName(lastName);
         actor.setLastUpdate(lastUpdate.toString());
@@ -63,7 +63,7 @@ class ActorServiceImpl implements ActorService {
     public Optional<ActorDto> get(Long actorId) {
 
         Optional<ActorRecord> result = dsl.selectFrom(ACTOR)
-                .where(ACTOR.ACTOR_ID.eq(actorId))
+                .where(ACTOR.ACTOR_ID.eq(Math.toIntExact(actorId)))
                 .fetchOptional();
 
         if(result.isPresent()) {
@@ -81,7 +81,7 @@ class ActorServiceImpl implements ActorService {
     @Override
     public void delete(Long actorId) {
         dsl.delete(ACTOR)
-           .where(ACTOR.ACTOR_ID.eq(actorId))
+           .where(ACTOR.ACTOR_ID.eq(Math.toIntExact(actorId)))
            .execute();
     }
 
@@ -92,7 +92,7 @@ class ActorServiceImpl implements ActorService {
            .set(ACTOR.FIRST_NAME, newActorData.getFirstName())
            .set(ACTOR.LAST_NAME, newActorData.getLastName())
            .set(ACTOR.LAST_UPDATE, LocalDateTime.now())
-           .where(ACTOR.ACTOR_ID.eq(actorId))
+           .where(ACTOR.ACTOR_ID.eq(Math.toIntExact(actorId)))
            .returningResult(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
            .fetchOne();
 

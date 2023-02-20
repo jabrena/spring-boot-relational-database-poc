@@ -41,7 +41,7 @@ public class CountryServiceImpl implements CountryService {
 
             var countryId = (flag == Boolean.FALSE) ? result : 999L;
             var result2 = dsl.insertInto(CITY, CITY.CITY_, CITY.COUNTRY_ID, CITY.LAST_UPDATE)
-                    .values("TabarniaCity", countryId, LocalDateTime.now())
+                    .values("TabarniaCity", (short) countryId, LocalDateTime.now())
                     .returningResult(CITY.CITY_ID)
                     .execute();
 

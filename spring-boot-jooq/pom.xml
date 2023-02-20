@@ -113,8 +113,8 @@
 										.withDatabaseName("postgres")
 										.withPassword("${db.password}")
 										.withCopyFileToContainer(
-												org.testcontainers.utility.MountableFile.forHostPath("src/main/resources/postgres-sakila-db/postgres-sakila-schema.sql"),
-												"/docker-entrypoint-initdb.d/postgres-sakila-schema.sql");
+												org.testcontainers.utility.MountableFile.forHostPath("spring-boot-jooq/src/main/resources/sql/step_1.sql"),
+												"/docker-entrypoint-initdb.d/step_1.sql");
 
 								db.start();
 								project.properties.setProperty('db.url', db.getJdbcUrl());
@@ -151,30 +151,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!--
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>7.14.0</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>migrate</goal>
-						</goals>
-						<configuration>
-							<url>${db.url}</url>
-							<user>${db.username}</user>
-							<password>${db.password}</password>
-							<locations>
-								<location>filesystem:src/main/resources/db/migration</location>
-							</locations>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			-->
-
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
@@ -237,6 +213,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M8</version>
 				<configuration>
 					<systemPropertyVariables>
 						<db.url>${db.url}</db.url>

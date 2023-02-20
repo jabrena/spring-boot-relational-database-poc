@@ -27,7 +27,7 @@ public class FilmServiceImpl implements FilmService {
 
     private FilmDto mapperToDto(FilmRecord ar) {
         var film = new FilmDto();
-        film.setFilmId(ar.getFilmId());
+        film.setFilmId(Long.valueOf(ar.getFilmId()));
         film.setTitle(ar.getTitle());
         return film;
     }
