@@ -10,7 +10,7 @@ the data access layer for a relational database.
 The Sakila database is a nicely normalised schema modelling a DVD rental store, featuring things like films,
 actors, film-actor relationships, and a central inventory table that connects films, stores, and rentals.
 
-![](docs/erd.png)
+![](docs/erd_new.png)
 
 ## Features
 
@@ -97,3 +97,4 @@ mvn versions:display-plugin-updates
 - https://www.pgadmin.org/
 - https://just.maciejwalkowiak.com/
 - https://openapi-generator.tech/docs/generators/spring
+- https://schemaspy.readthedocs.io/en/latest/index.html
