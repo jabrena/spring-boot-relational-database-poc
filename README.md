@@ -61,6 +61,8 @@ http://localhost:5050/
 docker-compose -f docker-compose.yml stop
 ```
 
+**Note:** Review the docker compose login & establish the connection
+
 ![](docs/pgadmin.png)
 
 # Dev Approach
@@ -68,8 +70,6 @@ docker-compose -f docker-compose.yml stop
 - Run a Docker image with the Schema + a Small Testing Data to develop the feature that you need
 - Develop the SQL Query
 - Implement the solution in your code
-
-**Note:** Review the docker compose login & establish the connection
 
 # Other commands
 
