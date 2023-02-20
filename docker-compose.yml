@@ -64,6 +64,19 @@ services:
     networks:
       - spring-cloud-network
 
+  spring-boot-mybatis:
+    container_name: spring-boot-mybatis
+    build:
+      context: spring-boot-mybatis
+      dockerfile: Dockerfile
+    image: spring-boot-mybatis:latest
+    ports:
+      - 8085:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker_compose
+    networks:
+      - spring-cloud-network
+
 networks:
     spring-cloud-network:
         driver: bridge

@@ -38,6 +38,19 @@ sdk env
 mvn verify
 ```
 
+# How to run the Docker Compose
+
+```bash
+docker-compose -f docker-compose.yml up -d
+sleep 50
+curl http://localhost:8081/api/v1/films
+curl http://localhost:8082/api/v1/films
+curl http://localhost:8083/api/v1/films
+curl http://localhost:8084/api/v1/films
+curl http://localhost:8085/api/v1/films
+docker-compose -f docker-compose.yml stop
+```
+
 # Other commands
 
 ```shell
