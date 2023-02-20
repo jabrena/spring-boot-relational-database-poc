@@ -23,12 +23,14 @@ actors, film-actor relationships, and a central inventory table that connects fi
 Container stats:
 
 ```
-CONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O     PIDS
-c2305a197f88   spring-boot-postgresql-sakiladb-1   0.05%     80.16MiB / 7.764GiB   1.01%     53.3kB / 202kB    0B / 80.1MB   36
-73f16a8c3ad4   spring-boot-jdbc                    0.30%     135.1MiB / 7.764GiB   1.70%     1.22kB / 0B       0B / 127kB    37
-967f606ef00a   spring-boot-jooq                    0.38%     193.9MiB / 7.764GiB   2.44%     15.9kB / 13.3kB   0B / 123kB    38
-9558952476a3   spring-data-jpa                     0.39%     234.4MiB / 7.764GiB   2.95%     175kB / 27.8kB    0B / 143kB    39
-357fe0f21c31   spring-data-jdbc                    0.33%     157.5MiB / 7.764GiB   1.98%     15.8kB / 13.3kB   0B / 123kB    38
+CONTAINER ID   NAME                                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+73f16a8c3ad4   spring-boot-jdbc                    0.39%     171.3MiB / 7.764GiB   2.15%     18.6kB / 16.7kB   176kB / 676kB     38
+01017c744be9   spring-data-jpa                     0.32%     223.7MiB / 7.764GiB   2.81%     42.6kB / 24.1kB   180kB / 651kB     39
+357fe0f21c31   spring-data-jdbc                    0.36%     151.1MiB / 7.764GiB   1.90%     15.5kB / 13.3kB   156kB / 643kB     38
+2eec46ce99d1   spring-boot-mybatis                 0.30%     176.5MiB / 7.764GiB   2.22%     1.23kB / 0B       0B / 651kB        38
+ce37c7bf3509   spring-boot-postgresql-pgadmin-1    0.08%     141.8MiB / 7.764GiB   1.78%     415kB / 3.33MB    20.5kB / 12.3MB   12
+967f606ef00a   spring-boot-jooq                    0.43%     207.9MiB / 7.764GiB   2.61%     15.5kB / 13.6kB   57.3kB / 668kB    38
+c2305a197f88   spring-boot-postgresql-sakiladb-1   0.00%     84.61MiB / 7.764GiB   1.06%     192kB / 244kB     885kB / 426kB     48
 ```
 
 ## How to build in local
@@ -50,6 +52,16 @@ curl http://localhost:8084/api/v1/films
 curl http://localhost:8085/api/v1/films
 docker-compose -f docker-compose.yml stop
 ```
+
+# How to run pgAdmin?
+
+```bash
+docker-compose -f docker-compose.yml up
+http://localhost:5050/
+docker-compose -f docker-compose.yml stop
+```
+
+**Note:** Review the docker compose login & establish the connection
 
 # Other commands
 
