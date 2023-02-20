@@ -7,8 +7,8 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: sakila
-    expose:
-      - 5432
+    ports:
+      - "5432:5432"
     networks:
       - spring-cloud-network
 
@@ -22,6 +22,33 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - sakiladb
+    networks:
+      - spring-cloud-network
+
+  schemaspy:
+    image: schemaspy/schemaspy
+    container_name: schemaspy
+    volumes:
+      - ./spy_data:/output
+    depends_on:
+      - sakiladb
+    entrypoint: ["/entrypoint.sh", "-t", "pgsql", "-db", "postgres",
+                 "-host", "sakiladb", "-port", "5432", "-u", "postgres",
+                 "-p", "sakila", "-s", "public"]
+    networks:
+      - spring-cloud-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_schemaspy
+    volumes:
+      - ./spy_data:/usr/share/nginx/html
+    ports:
+      - "99:80"
+    depends_on:
+      - schemaspy
     networks:
       - spring-cloud-network
 
