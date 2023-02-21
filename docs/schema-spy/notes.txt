@@ -1,0 +1,2 @@
+docker build . -f Dockerfile -t schema-spy-local
+docker run schema-spy-local:latest
