@@ -36,3 +36,7 @@ jobs:
           curl http://localhost:8086/api/v1/films
           curl http://localhost:8085/api/v1/films
           docker-compose -f docker-compose.yml stop
+
+      - name: GraalVM compilation
+        run: |
+          build.sh
