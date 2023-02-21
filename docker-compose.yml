@@ -34,9 +34,6 @@ services:
       - ./docs/spy_data:/output
     depends_on:
       - sakiladb
-#    entrypoint: ["/entrypoint.sh", "-t", "pgsql", "-db", "postgres",
-#                 "-host", "sakiladb", "-port", "5432", "-u", "postgres",
-#                 "-p", "sakila", "-s", "public"]
     networks:
       - spring-cloud-network
 
