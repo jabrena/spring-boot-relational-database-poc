@@ -28,15 +28,15 @@ services:
       - spring-cloud-network
 
   schemaspy:
-    image: schemaspy/schemaspy
+    image: schema-spy-local:latest
     container_name: schemaspy
     volumes:
       - ./docs/spy_data:/output
     depends_on:
       - sakiladb
-    entrypoint: ["/entrypoint.sh", "-t", "pgsql", "-db", "postgres",
-                 "-host", "sakiladb", "-port", "5432", "-u", "postgres",
-                 "-p", "sakila", "-s", "public"]
+#    entrypoint: ["/entrypoint.sh", "-t", "pgsql", "-db", "postgres",
+#                 "-host", "sakiladb", "-port", "5432", "-u", "postgres",
+#                 "-p", "sakila", "-s", "public"]
     networks:
       - spring-cloud-network
 

@@ -43,6 +43,9 @@ mvn verify
 # How to run the Docker Compose
 
 ```bash
+cd docs/schema-spy/
+docker build . -f Dockerfile -t schema-spy-local
+cd ../../
 docker-compose -f docker-compose.yml up -d
 sleep 50
 curl http://localhost:8081/api/v1/films

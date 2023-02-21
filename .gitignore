@@ -3,6 +3,11 @@ target
 *.iml
 .DS_Store
 .vscode
+docs/spy_data
 
 #Just
 .pom.xml.temp
+
+#Temporal
+postgresql-42.5.4.jar
+schemaSpy.jar
