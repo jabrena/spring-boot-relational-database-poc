@@ -1,0 +1,22 @@
+name: GraalVM support
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  run:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: GraalVM compilation
+        run: |
+          ./build.sh
