@@ -36,5 +36,4 @@ components:
           description: unique identifier for any film
         title:
           type: string
-          format: int64
           description: Film movie
