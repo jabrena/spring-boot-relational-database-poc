@@ -119,13 +119,10 @@ components:
           description: unique identifier for any actor
         first_name:
           type: string
-          format: int64
           description: first name
         last_name:
           type: string
-          format: int64
           description: last name
         last_update:
           type: string
-          format: int64
           description: last time that actor data was updated

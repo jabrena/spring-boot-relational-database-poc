@@ -62,8 +62,9 @@ class ActorServiceImpl implements ActorService {
     @Override
     public Optional<ActorDto> get(Long actorId) {
 
+        //TODO Unify criteria OAS-SQL
         Optional<ActorRecord> result = dsl.selectFrom(ACTOR)
-                .where(ACTOR.ACTOR_ID.eq(Math.toIntExact(actorId)))
+                .where(ACTOR.ACTOR_ID.eq(actorId.intValue()))
                 .fetchOptional();
 
         if(result.isPresent()) {
@@ -80,19 +81,21 @@ class ActorServiceImpl implements ActorService {
 
     @Override
     public void delete(Long actorId) {
+        //TODO Unify criteria OAS-SQL
         dsl.delete(ACTOR)
-           .where(ACTOR.ACTOR_ID.eq(Math.toIntExact(actorId)))
+           .where(ACTOR.ACTOR_ID.eq(actorId.intValue()))
            .execute();
     }
 
     @Override
     public ActorDto update(Long actorId, ActorDto newActorData) {
 
+        //TODO Unify criteria OAS-SQL
         org.jooq.Record result = dsl.update(ACTOR)
            .set(ACTOR.FIRST_NAME, newActorData.getFirstName())
            .set(ACTOR.LAST_NAME, newActorData.getLastName())
            .set(ACTOR.LAST_UPDATE, LocalDateTime.now())
-           .where(ACTOR.ACTOR_ID.eq(Math.toIntExact(actorId)))
+           .where(ACTOR.ACTOR_ID.eq(actorId.intValue()))
            .returningResult(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME, ACTOR.LAST_UPDATE)
            .fetchOne();
 
