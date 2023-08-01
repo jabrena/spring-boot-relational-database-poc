@@ -3,6 +3,7 @@ package info.jab.ms.service;
 import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
-class ActorServiceImpl implements ActorService {
+@Service("jdbcActorService")
+class ActorServiceImplV2 implements ActorService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private JdbcClient jdbcClient;
 
     @Override
     public List<ActorDto> getAll() {

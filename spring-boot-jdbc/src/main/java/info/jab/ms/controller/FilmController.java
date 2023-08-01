@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class FilmController implements ApiApi {
 
-    @Qualifier("jdbcClientService")
+    @Qualifier("jdbcFilmService")
     @Autowired
     private FilmService filmService;
 

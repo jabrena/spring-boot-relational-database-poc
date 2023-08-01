@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("jdbcClientService")
+@Service("jdbcFilmService")
 class FilmServiceImplV2 implements FilmService {
 
     @Autowired
