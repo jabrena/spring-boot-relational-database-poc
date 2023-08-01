@@ -4,8 +4,10 @@ import com.jab.ms.openapi.film.gen.api.ApiApi;
 import com.jab.ms.openapi.film.gen.model.FilmDto;
 import info.jab.ms.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 public class FilmController implements ApiApi {
+
+    @Qualifier("jdbcFilmService")
     @Autowired
     private FilmService filmService;
 

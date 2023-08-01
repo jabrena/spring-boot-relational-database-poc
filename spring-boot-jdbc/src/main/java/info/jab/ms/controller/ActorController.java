@@ -1,9 +1,12 @@
 package info.jab.ms.controller;
 
+
 import com.jab.ms.openapi.actor.gen.api.ApiApi;
 import com.jab.ms.openapi.actor.gen.model.ActorDto;
 import info.jab.ms.service.ActorService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,8 @@ import java.util.List;
 
 @RestController
 public class ActorController implements ApiApi {
+
+    @Qualifier("jdbcActorService")
     @Autowired
     private ActorService actorService;
 
@@ -29,12 +34,8 @@ public class ActorController implements ApiApi {
 
     @Override
     public ResponseEntity<ActorDto> getActor(@PathVariable("id") Long actorId) {
-        var result = actorService.get(actorId);
-        if(result.isPresent()) {
-            return ResponseEntity.ok().body(actorService.get(actorId).get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Optional<ActorDto> actor = actorService.get(actorId);
+        return actor.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @Override
@@ -50,13 +51,11 @@ public class ActorController implements ApiApi {
 
     @Override
     public ResponseEntity<ActorDto> updateActor(@PathVariable("id") Long actorId, @RequestBody ActorDto actorData) {
-        var result = actorService.get(actorId);
-        if(result.isPresent()) {
-            var actorUpdated = actorService.update(actorId, actorData);
-            return ResponseEntity.ok().body(actorUpdated);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Optional<ActorDto> actor = actorService.get(actorId);
+        return actor.map(a -> {
+            ActorDto updatedActor = actorService.update(actorId, actorData);
+            return ResponseEntity.ok().body(updatedActor);
+        }).orElse(ResponseEntity.notFound().build());
     }
 
 }
