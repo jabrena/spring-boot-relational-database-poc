@@ -2,17 +2,17 @@ package info.jab.ms.service;
 
 import com.jab.ms.openapi.film.gen.model.FilmDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-class FilmServiceImpl implements FilmService {
+@Service("jdbcClientService")
+class FilmServiceImplV2 implements FilmService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcClient jdbcClient;
 
     @Override
     public List<FilmDto> getFilms() {
@@ -30,6 +30,9 @@ class FilmServiceImpl implements FilmService {
             return film;
         };
 
-        return jdbcTemplate.query(sql, filmDtoRowMapper);
+        return jdbcClient
+            .sql(sql)
+            .query(filmDtoRowMapper)
+            .list();
     }
 }

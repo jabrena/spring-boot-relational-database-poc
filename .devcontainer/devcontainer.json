@@ -27,7 +27,6 @@
 				"vscjava.vscode-java-pack",
 				"vscjava.vscode-java-debug",
 				"vscjava.vscode-maven",
-				"mathiasfrohlich.kotlin",
 				"vscjava.vscode-gradle",
 				"vscjava.vscode-java-dependency",
 				"vscjava.vscode-java-test",
@@ -37,10 +36,9 @@
 				"vmware.vscode-boot-dev-pack",
 				"vmware.vscode-spring-boot",
 				"ms-azuretools.vscode-docker",
-				"github.copilot",
 				"redhat.vscode-xml",
 				"redhat.vscode-yaml",
-				"tomoki1207.pdf"
+				"editorconfig.editorconfig"
 			]
 		}
 	}
