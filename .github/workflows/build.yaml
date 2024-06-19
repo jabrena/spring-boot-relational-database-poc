@@ -11,17 +11,17 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: graalvm/setup-graalvm@v1
         with:
           version: 'latest'
-          java-version: '17'
+          java-version: '21'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Maven Verify
         run: |
-          ./mvnw --batch-mode --no-transfer-progress -B verify
+          ./mvnw --batch-mode --no-transfer-progress verify
 
       - name: Docker compose verification
         run: |
