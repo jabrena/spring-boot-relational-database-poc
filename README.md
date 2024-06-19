@@ -37,7 +37,7 @@ c2305a197f88   spring-boot-postgresql-sakiladb-1   0.00%     84.61MiB / 7.764GiB
 
 ```bash
 sdk env
-mvn verify
+./mvnw clean verify
 ```
 
 # How to run the Docker Compose
@@ -77,8 +77,10 @@ docker-compose -f docker-compose.yml stop
 # Other commands
 
 ```shell
-mvn versions:display-dependency-updates
-mvn versions:display-plugin-updates
+./mvnw versions:display-property-updates
+./mvnw versions:display-dependency-updates
+./mvnw versions:display-plugin-updates
+./mvnw dependency:tree
 ```
 
 ## References
